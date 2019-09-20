@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from "axios";  // data를 fatch를 하기 위해 사용한다.
 // fetch위에 감싸진 layer라고 볼 수 있다.
 // 사용하기 위해 npm install axios 
-import Movie from "./Movie"
+import Movie from "./movie"
 
 class App extends Component {
   state = {
@@ -15,7 +15,7 @@ class App extends Component {
     // const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json")
     // console.log(movies.data.data.movies); // => {data: {data: {movies} } }
     // JSONView 라는 크롬 확장프로그램을 설치하면 json파일을 이쁘게 볼 수 있다.
-    const {data: {data: {movies} } } = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating");// ?sort_by=rating은 rating순으로 정렬하겠다 는 뜻 api에서 옵션 찾을수 있음
+    const {data: {data: {movies} } } = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating")// ?sort_by=rating은 rating순으로 정렬하겠다 는 뜻 api에서 옵션 찾을수 있음
 
     console.log(movies);
     // this.setState({movies : movies}); // =>  this.setState({ movies }); 로 줄이는 것 가능 
@@ -33,29 +33,25 @@ class App extends Component {
   render(){
     const { isLoading, movies } = this.state;
     return (      
-      <section className="container" >
+      <div className="App" >
       {isLoading 
-        ? <div className="loader">
-            <span>Loading...</span>
-          </div>
-        :<div className="movies"> 
-          {movies.map( movie => {
-            // console.log(movie);
-            return (
-              <Movie 
-                key = {movie.id}
-                id = {movie.id}
-                year = {movie.year}
-                title = {movie.title}
-                summary = {movie.summary}
-                poster = {movie.medium_cover_image}
-                genres = {movie.genres}
-              />
-            )
-          })}
-        </div> 
+        ? "Loading..." 
+        : movies.map( movie =>{
+          console.log(movie);
+          return (
+            <div>hi</div>
+            <Movie 
+              id = {Movie.id}
+              year = {Movie.year}
+              title = {Movie.title}
+              summary = {Movie.summary}
+              poster = {Movie.medium_cover_image}
+            />
+          )
+        })
       }
-      </section>
+        <Movie />
+      </div>
     );
   }
 }
