@@ -1,0 +1,51 @@
+import React, { useState, useEffect } from 'react';
+
+import { connect } from "react-redux";
+// import {bindActionCreators} from "redux";
+
+// import * as popularActions from "../modules/popular";
+
+import { moviesApi } from "../api"
+
+import List from '../components/List';
+
+const ListContainer = ({ current, match }) => {
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [movies, setMovies] = useState([]); // movie 안에 api 데이타 담는다
+    const [page] = useState(current); // 첫번째 페이지만 보이게 하려고 
+    const urlpath = match.path
+    // console.log(urlpath);
+
+    const movieList = async (path, page) => {
+        setIsLoading(true);
+        const { data : { results } } = await moviesApi.callList(path, page);  
+        // console.log(movieList);
+        console.log(results);
+        setMovies([...results]);
+        setIsLoading(false);
+    };
+
+    useEffect(()=>{
+        movieList(urlpath);
+    }, [urlpath]);
+
+    return (
+        <>  
+            <List 
+                isLoading = {isLoading}
+                movies = {movies}
+                path = {match.path}
+            />
+        </>
+    )
+}
+
+const mapStateToProps = ({movie}) => ({
+    current: movie.current
+});
+
+
+export default connect(
+    mapStateToProps,
+    // mapDispatchToProps
+)(ListContainer);
