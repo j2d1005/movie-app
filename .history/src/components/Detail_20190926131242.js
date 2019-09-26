@@ -70,7 +70,34 @@ const Content = styled.div`
 `;
 
 const Detail = ({ isLoading, movieData }) => {
+    // const video = movieData.videos.results;
+    {console.log(movieData.videos)}
     return (
+    //     <div className="video_box clearfix">
+    //     {result.videos.results.length > 0 
+    //     ? <>
+    //         <h3>Videos</h3>
+    //         {
+    //           result.videos.results.map((video, index) => index < 4
+    //           ?
+    //           <div className="video" key={index}>
+    //             <Dotdotdot clamp={3}>
+    //                 <p>{video.name}</p>
+    //             </Dotdotdot>
+    //             <iframe src={`https://www.youtube.com/embed/${video.key}`} title={video.name}>
+    //             </iframe>
+    //           </div>
+    //           : ""
+    //         )
+    //         }
+    //       </>
+    //     : ""
+    //     }
+    //   </div>
+        // <div>
+        //     Detail Page{movieId}
+        //     {console.log(movieData)}
+        // </div>
         <>
         {console.log(movieData)}
             {isLoading

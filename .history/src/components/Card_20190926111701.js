@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import noimg from "../assets/images/no-img.png"
+import noimg from "../assets/images/no-img.jpg"
 
 const Item = styled.li`
     display: inline-block;

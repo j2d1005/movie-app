@@ -9,7 +9,7 @@ import { moviesApi } from "../api"
 import List from '../components/List';
 import PaginationContainer from './PaginationContainer'
 
-const ListContainer = ({ current, match }) => {
+const ListContainer = ({ current, match, start, end }) => {
     const [ isLoading, setIsLoading ] = useState(false);
     const [movies, setMovies] = useState([]); // movie 안에 api 데이타 담는다
     const [currentPage, setCurrentPage] = useState(current); // current번째 페이지만 보인다. 
@@ -51,6 +51,10 @@ const ListContainer = ({ current, match }) => {
 
     }, [urlpath, currentPage]);
 
+    //current는 초기화 했는데 페이지넘버는 안돌아옴~!!!!
+    useEffect(()=>{
+        currentPageSetting(1);
+    },[urlpath]);
     return (
         <>  
             <List 

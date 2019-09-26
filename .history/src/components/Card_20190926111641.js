@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import noimg from "../assets/images/no-img.png"
+import noimg from "../assets/images/no-img.jpg"
 
 const Item = styled.li`
     display: inline-block;
@@ -24,7 +24,6 @@ const Item = styled.li`
               top:0;
               left:0;
               box-shadow: 3px 3px 10px #000;
-              vertical-align:middle;
           } 
       }
       
@@ -68,7 +67,7 @@ const Card = ({ id, title, desc, poster }) => {
                 <div className="img_wrap">
                     { poster 
                         ?<img src={`https://image.tmdb.org/t/p/w500${poster}`} alt={title} title={title} />
-                        :<img src={noimg} alt={title} title={title} />
+                        :<img src={noimg} alt={title} title={title} style="height:100%"/>
                     }
                 </div>                
                 <div className="movie__data">

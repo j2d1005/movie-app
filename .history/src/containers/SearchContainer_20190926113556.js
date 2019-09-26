@@ -37,6 +37,7 @@ const SearchContainer = ({ current, match }) => {
 
     // submit 외에도 페이지네이션 클릭했을때도 list갱신해야됨
     useEffect(()=>{
+        currentPageSetting(currentPage);
         searchList(currentPage);
         setCategory(`Search By ${searched}`);   
     }, [currentPage, searched]);

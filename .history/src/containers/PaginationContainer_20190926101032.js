@@ -3,18 +3,15 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as movieActions from "../modules/movie";
 import Pagination from '../components/Pagination';
-let url = ""; // url비교해서 페이지네이션 초기화를 위해 사용한다.
-const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSetting, start, end, movieActions }) => {
-    const [startPage] = useState(start);
-    const [endPage] = useState(end);
 
+const PaginationContainer = ({ pageLength, currentPage, currentPageSetting, start, end, movieActions }) => {
     const array = [];
     for (let i=0; i<pageLength; i++){
         array.push(i+1);
     }
     // console.log(array);
 
-    const target = array.slice(startPage, endPage);
+    const target = array.slice(start, end);
 
     //actions
     const updateCurrent = (page) => {
@@ -29,8 +26,8 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
     const prevPage = () => {
         if( currentPage === 1 ) return alert("첫번째 페이지 입니다.");
         if( currentPage % 5 === 1 ){ // 5로 나누고 나머지가 1일 때 , 6 11 16 
-            const s = startPage - 5;
-            const e = endPage - 5;
+            const s = start - 5;
+            const e = end - 5;
             updateStartEnd(s,e);
             console.log(s,e)
         }
@@ -40,8 +37,8 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
     const nextPage = () => {
         if( currentPage === pageLength ) return alert("마지막 페이지 입니다.");
         if( currentPage % 5 === 0 ){ // 5로 나누고 나머지가 0일 때 5 10 15 20 
-            const s = startPage + 5;
-            const e = endPage + 5;
+            const s = start + 5;
+            const e = end + 5;
             updateStartEnd(s,e);
         }
         updateCurrent(currentPage + 1);
@@ -52,32 +49,20 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
         updateCurrent(currentPage = 1);
         updateStartEnd(0,5);
     };
-
+//
     const goLast = () => {
         if( currentPage === pageLength ) return alert("마지막 페이지 입니다.");
         updateCurrent(currentPage = pageLength);
-        updateStartEnd(pageLength-5 ,pageLength);
+        const s = (pageLength - (pageLength % 5) );
+        const e = pageLength;
+        updateStartEnd(s ,e);
     };
 
-    // const goLast = () => {
-    //     if( currentPage === pageLength ) return alert("마지막 페이지 입니다.");
-    //     updateCurrent(currentPage = pageLength);
-    //     const s = (pageLength - (pageLength % 5) );
-    //     const e = pageLength;
-    //     updateStartEnd(s ,e);
-    // };
+    //  초기화 어떻게 해!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // useEffect(()=>{
+    //     updateStartEnd(start, end);
+    // },[]);
 
-
-    useEffect(()=>{
-        if(url!==urlpath){
-            console.log("현재url"+url,"바뀐url"+urlpath);
-            updateCurrent(1);
-            updateStartEnd(0, 5);
-            url=urlpath;
-        }
-    },[urlpath]);
-    
-    {console.log(urlpath,currentPage, start,startPage, end,endPage)}
     return (
         <Pagination
             currentPage={currentPage}
@@ -88,13 +73,13 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
             goFirst={goFirst}
             goLast={goLast}
         />
-        
     )
 }
 
 const mapStateToProps = ({movie}) => ({
+    current: movie.current,
     start: movie.start,
-    end: movie.end
+    end: movie.end,
 });
 
 const mapDispatchToProps = dispatch => ({

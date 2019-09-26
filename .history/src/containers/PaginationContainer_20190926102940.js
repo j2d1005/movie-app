@@ -3,11 +3,10 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as movieActions from "../modules/movie";
 import Pagination from '../components/Pagination';
-let url = ""; // url비교해서 페이지네이션 초기화를 위해 사용한다.
-const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSetting, start, end, movieActions }) => {
-    const [startPage] = useState(start);
-    const [endPage] = useState(end);
 
+const PaginationContainer = ({ pageLength, currentPage, currentPageSetting, start, end, movieActions }) => {
+    const [startPage, setStartPage] = useState(start);
+    const [endPage, setEndPage] = useState(end);
     const array = [];
     for (let i=0; i<pageLength; i++){
         array.push(i+1);
@@ -58,7 +57,6 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
         updateCurrent(currentPage = pageLength);
         updateStartEnd(pageLength-5 ,pageLength);
     };
-
     // const goLast = () => {
     //     if( currentPage === pageLength ) return alert("마지막 페이지 입니다.");
     //     updateCurrent(currentPage = pageLength);
@@ -67,17 +65,13 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
     //     updateStartEnd(s ,e);
     // };
 
-
+    //  초기화 어떻게 해!!!!!!!!!!!!!!!!!!!!!!!!!!
     useEffect(()=>{
-        if(url!==urlpath){
-            console.log("현재url"+url,"바뀐url"+urlpath);
-            updateCurrent(1);
-            updateStartEnd(0, 5);
-            url=urlpath;
-        }
-    },[urlpath]);
+        updateCurrent(currentPage)
+        updateStartEnd(start, end);
+    },[]);
     
-    {console.log(urlpath,currentPage, start,startPage, end,endPage)}
+    {console.log(currentPage, start,startPage, end,endPage)}
     return (
         <Pagination
             currentPage={currentPage}
@@ -93,6 +87,7 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
 }
 
 const mapStateToProps = ({movie}) => ({
+    current: movie.current,
     start: movie.start,
     end: movie.end
 });

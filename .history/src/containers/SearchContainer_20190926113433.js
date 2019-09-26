@@ -46,9 +46,9 @@ const SearchContainer = ({ current, match }) => {
         setCurrentPage(page);
     };
 
-    // useEffect(()=>{
-    //     currentPageSetting(1);
-    // },[match.path]);
+    useEffect(()=>{
+        currentPageSetting(1);
+    },[match.path]);
 
     return (
         <Search 

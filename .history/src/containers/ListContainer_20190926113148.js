@@ -51,6 +51,10 @@ const ListContainer = ({ current, match }) => {
 
     }, [urlpath, currentPage]);
 
+    //current는 초기화 했는데 페이지넘버는 안돌아옴~!!!!
+    useEffect(()=>{
+        currentPageSetting(1);
+    },[urlpath]);
     return (
         <>  
             <List 

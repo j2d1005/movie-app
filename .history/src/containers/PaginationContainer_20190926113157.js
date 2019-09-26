@@ -71,7 +71,7 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
     useEffect(()=>{
         if(url!==urlpath){
             console.log("현재url"+url,"바뀐url"+urlpath);
-            updateCurrent(1);
+            // updateCurrent(1);
             updateStartEnd(0, 5);
             url=urlpath;
         }

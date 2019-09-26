@@ -88,7 +88,6 @@ const Search = ({ keyWord, onChange, onSubmit, isSearching, isLoading, movies, c
             }
             {!isLoading &&
                 <PaginationContainer 
-                    urlpath = {urlpath}  
                     currentPageSetting={currentPageSetting}
                     currentPage={currentPage}
                     pageLength={pageLength}

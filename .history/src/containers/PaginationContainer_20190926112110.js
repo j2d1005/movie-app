@@ -58,7 +58,6 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
         updateCurrent(currentPage = pageLength);
         updateStartEnd(pageLength-5 ,pageLength);
     };
-
     // const goLast = () => {
     //     if( currentPage === pageLength ) return alert("마지막 페이지 입니다.");
     //     updateCurrent(currentPage = pageLength);
@@ -67,10 +66,12 @@ const PaginationContainer = ({ urlpath, pageLength, currentPage, currentPageSett
     //     updateStartEnd(s ,e);
     // };
 
+    //  초기화 어떻게 해!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     useEffect(()=>{
+        console.log(url,urlpath);
         if(url!==urlpath){
-            console.log("현재url"+url,"바뀐url"+urlpath);
+            console.log(".."+url,urlpath);
             updateCurrent(1);
             updateStartEnd(0, 5);
             url=urlpath;

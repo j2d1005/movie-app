@@ -71,6 +71,10 @@ const Content = styled.div`
 
 const Detail = ({ isLoading, movieData }) => {
     return (
+        // <div>
+        //     Detail Page{movieId}
+        //     {console.log(movieData)}
+        // </div>
         <>
         {console.log(movieData)}
             {isLoading

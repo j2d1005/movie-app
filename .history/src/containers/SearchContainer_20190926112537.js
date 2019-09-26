@@ -46,10 +46,6 @@ const SearchContainer = ({ current, match }) => {
         setCurrentPage(page);
     };
 
-    // useEffect(()=>{
-    //     currentPageSetting(1);
-    // },[match.path]);
-
     return (
         <Search 
             keyWord={keyWord}
@@ -59,8 +55,8 @@ const SearchContainer = ({ current, match }) => {
             isSearching={isSearching}
             isLoading = {isLoading}
             movies = {movies}
-            category = {category}
             urlpath = {match.path}
+            category = {category}
             //페이지네이션관련
             currentPage = {currentPage}
             pageLength = {pageLength}
